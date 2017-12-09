@@ -5,6 +5,7 @@ export default class Layout extends React.Component {
         return(
             <div className="header">
                 Simple header here
+                Eventually have list of links
             </div>
         );
     }
