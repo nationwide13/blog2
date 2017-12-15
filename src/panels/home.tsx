@@ -1,8 +1,10 @@
 import * as React from 'react';
+import { Link } from 'react-router-dom';
+import { DefaultProps } from '../constants/definitions';
 import Layout from '../core/layout';
 import logo from '../logo.svg';
 
-export default class Home extends React.Component {
+export default class Home extends React.Component<DefaultProps> {
     public componentWillMount() {
         document.title = 'Home Page';
     }
@@ -15,6 +17,9 @@ export default class Home extends React.Component {
                 </div>
                 <p className="App-intro">Major work in progress, just barely got started so take a chill pill</p>
                 <p>This is a test for auto build</p>
+                <div>
+                    <Link to="/list">List</Link>
+                </div>
             </Layout>
         );
     }
