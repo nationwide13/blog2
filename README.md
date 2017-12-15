@@ -1,4 +1,4 @@
-This project is for a ReactJS blog using AWS AppSync and other AWS tools as a serverless backend.
+This project is for a Typescript and ReactJS blog using AWS AppSync and other AWS tools as a serverless backend.
 
 Below is the original README from react-create-app
 
