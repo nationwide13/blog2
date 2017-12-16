@@ -4,6 +4,8 @@ import Modal from '../components/modal';
 import { Auth } from 'aws-amplify';
 import * as FontAwesome from 'react-fontawesome';
 
+import './admin.css';
+
 interface AdminState {
     modalOpen: boolean;
     form: {
@@ -34,7 +36,7 @@ export default class Admin extends React.Component<DefaultProps, AdminState> {
             <div>
                 {this.state.modalOpen &&
                     <Modal title="Admin Login" onDismiss={this.modalClose}>
-                        <div>
+                        <div className="admin-form">
                             {!this.state.loading &&
                                 <form onSubmit={this.handleSubmit}>
                                     <input onChange={this.updateField.bind(this, 'username')} value={this.state.form.username} type="text" name="username" placeholder="Username"/>
