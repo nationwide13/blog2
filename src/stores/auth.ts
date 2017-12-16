@@ -14,6 +14,7 @@ interface AuthStoreDefinition extends Reflux.Store {
     isAdmin: () => boolean;
     load: (user: CognitoUser) => void;
     signOut: () => boolean;
+    signIn: (username: string, password: string) => string;
 }
 export interface CognitoUser {
     username: string;
@@ -73,6 +74,14 @@ const AuthStore = Reflux.createStore({
             Auth.signOut().then(() => true);
         }
         return false;
+    },
+
+    signIn(username: string, password: string) {
+        if (!this.isSignedIn()) {
+            Auth.signIn(username, password).catch((e: Error) => {
+                return 'failed';
+            });
+        }
     }
 }) as AuthStoreDefinition;
 

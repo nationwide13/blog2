@@ -1,35 +1,75 @@
 import * as React from 'react';
-import { Link, Route } from 'react-router-dom';
 import { DefaultProps } from '../constants/definitions';
-import Home from './home';
-import Layout from '../core/layout';
+import Modal from '../components/modal';
+import { Auth } from 'aws-amplify';
+import * as FontAwesome from 'react-fontawesome';
 
-import logo from '../logo.svg';
-
-export default class List extends React.Component<DefaultProps> {
+interface AdminState {
+    modalOpen: boolean;
+    form: {
+        username: string;
+        password: string;
+    };
+    loading: boolean;
+    error: string;
+}
+export default class Admin extends React.Component<DefaultProps, AdminState> {
     public componentWillMount() {
         document.title = 'List Page';
     }
+    public constructor(props: DefaultProps) {
+        super(props);
+        this.state = {
+            error: '',
+            form: {
+                password: '',
+                username: ''
+            },
+            loading: false,
+            modalOpen: true
+        };
+    }
     public render() {
-        console.log(this.props.match);
         return (
             <div>
-                {this.props.match.isExact &&
-                <Layout className="App">
-                    <div className="App-header">
-                        <img src={logo} className="App-logo" alt="logo"/>
-                        <h2>Test list page</h2>
-                    </div>
-                    <p className="App-intro">
-                        Major work in progress, just barely got started so take a chill pill
-                    </p>
-                    <div>
-                        <Link to="/">Home</Link>
-                    </div>
-                </Layout>
+                {this.state.modalOpen &&
+                    <Modal title="Admin Login" onDismiss={this.modalClose}>
+                        <div>
+                            {!this.state.loading &&
+                                <form onSubmit={this.handleSubmit}>
+                                    <input onChange={this.updateField.bind(this, 'username')} value={this.state.form.username} type="text" name="username" placeholder="Username"/>
+                                    <input onChange={this.updateField.bind(this, 'password')} value={this.state.form.password} type="password" name="password" placeholder="Password"/>
+                                    <button type="submit">Login</button>
+                                    {this.state.error && <p className="login-error">{this.state.error}</p>}
+                                </form>
+                            }
+                            {this.state.loading && <FontAwesome className="spinner" name="spinner"/>}
+                        </div>
+                    </Modal>
                 }
-                <Route path="/list/:topic" component={Home}/>
             </div>
         );
+    }
+    public modalClose = () => {
+        this.setState({modalOpen: false });
+    }
+    public handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+        this.setState({
+            loading: true
+        });
+        Auth.signIn(this.state.form.username, this.state.form.password).catch(() => {
+            this.setState({
+                error: 'Login failed. Please check your username and password',
+                loading: false
+            });
+        });
+    }
+    public updateField = (data: string, event: React.FormEvent<HTMLInputElement>) => {
+        const form = this.state.form;
+        form[data] = event.currentTarget.value;
+        this.setState({
+            form
+        });
     }
 }

@@ -18,8 +18,11 @@
   font-size: large;
 }
 .amplify-container {
+  display: none;
 }
-
+.spinner {
+  animation: App-logo-spin infinite 1s linear;
+}
 @keyframes App-logo-spin {
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }

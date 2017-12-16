@@ -1,7 +1,9 @@
 import * as React from 'react';
 import { Switch, Route, Redirect, withRouter } from 'react-router-dom';
+import * as querystring from 'query-string';
 import Home from './panels/home';
 import List from './panels/list';
+import Admin from './panels/admin';
 import { DefaultProps } from './constants/definitions';
 import AuthStore from './stores/auth';
 import { Authenticator } from 'aws-amplify-react';
@@ -16,15 +18,17 @@ class App extends React.Component<DefaultProps, {authState: string, authListener
         };
     }
     public render() {
-        console.log(this.props.match);
+        const qs = querystring.parse(this.props.location.search);
+        const showAdmin = Object.prototype.hasOwnProperty.call(qs, 'admin');
         return (
             <main>
                 <Authenticator onStateChange={this.handleAuthStateChange} />
                 <Switch>
                     <Route exact={true} path="/" component={Home}/>
-                    <PrivateRoute path="/list" component={List}/>
+                    <Route path="/list" component={List}/>
+                    <PrivateRoute path="/private" component={List}/>
                 </Switch>
-                <Route path="admin" component={List} />
+                {showAdmin && !AuthStore.isSignedIn() && <Route component={Admin}/>}
             </main>
         );
     }
