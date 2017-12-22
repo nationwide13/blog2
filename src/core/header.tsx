@@ -12,6 +12,7 @@ export default class Header extends React.Component<{}, HeaderState> {
                 <AdminHeader/>
                 <div className="left">
                     <NavLink to="/" activeStyle={{color: 'red'}} exact={true}>Featured</NavLink>
+                    <NavLink to="/btc" activeStyle={{color: 'red'}} exact={true}>BTC</NavLink>
                 </div>
                 <div className="right">
                     Search Maybe?
