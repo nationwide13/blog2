@@ -13,3 +13,14 @@ declare module 'aws-amplify-react' {
     export const Authenticator: any;
     export default value;
 }
+declare module 'aws-appsync/lib/link/auth-link' {
+    const value: any;
+    export const AUTH_TYPE: {[key: string]: string; };
+    export default value;
+}
+declare module 'aws-appsync' {
+    const value: any;
+    export default value;
+}
+declare module 'lodash.flowright';
+declare module 'aws-appsync-react';

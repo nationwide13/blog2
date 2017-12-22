@@ -3,6 +3,9 @@ import { Link, Route } from 'react-router-dom';
 import { DefaultProps } from '../constants/definitions';
 import Home from './home';
 import Layout from '../core/layout';
+import AppSyncStore from '../stores/appsync';
+import { Post } from '../constants/schema';
+import Album from '../components/imgur/album';
 
 import logo from '../logo.svg';
 
@@ -11,6 +14,7 @@ export default class List extends React.Component<DefaultProps> {
         document.title = 'List Page';
     }
     public render() {
+        AppSyncStore.getAllPostsQuery((data: Post[]) => console.log(data), 1);
         return (
             <div>
                 {this.props.match.isExact &&
@@ -25,6 +29,7 @@ export default class List extends React.Component<DefaultProps> {
                         <div>
                             <Link to="/">Home</Link>
                         </div>
+                        <Album album="0ZXgI"/>
                     </Layout>
                 }
                 <Route path="/list/:topic" component={Home}/>

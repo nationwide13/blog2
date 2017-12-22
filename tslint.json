@@ -12,6 +12,7 @@
         "ban": false,
         "ban-types": false,
         "class-name": true,
+        "no-submodule-imports": false,
         "comment-format": [
             true,
             "check-space"

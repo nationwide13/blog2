@@ -4,6 +4,7 @@ import * as querystring from 'query-string';
 import Home from './panels/home';
 import List from './panels/list';
 import Admin from './panels/admin';
+import BTC from './panels/btc';
 import { DefaultProps } from './constants/definitions';
 import AuthStore from './stores/auth';
 import { Authenticator } from 'aws-amplify-react';
@@ -26,6 +27,7 @@ class App extends React.Component<DefaultProps, {authState: string, authListener
                 <Switch>
                     <Route exact={true} path="/" component={Home}/>
                     <Route path="/list" component={List}/>
+                    <Route path="/btc" component={BTC}/>
                     <PrivateRoute path="/private" component={List}/>
                 </Switch>
                 {showAdmin && !AuthStore.isSignedIn() && <Route component={Admin}/>}
