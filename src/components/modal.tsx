@@ -20,7 +20,7 @@ export default class Modal extends React.Component<ModalProps> {
                 <div onClick={this.props.dismissable ? this.props.onDismiss : () => null} className="modal-overlay"/>
                 <div className="modal-content">
                     <div className="modal-header">{this.props.title ? this.props.title : ''}{this.props.dismissable && <FontAwesome name="times" className="modal-close" onClick={this.props.onDismiss}/>}</div>
-                    {this.props.children}
+                    <div className="modal-children">{this.props.children}</div>
                 </div>
             </div>
         );

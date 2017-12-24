@@ -21,9 +21,12 @@
     transform: translateX(-50%) translateY(-50%);
     background-color: #FFF;
     width: 50%;
-    min-width: 250px;
-    min-height: 250px;
+    min-width: 300px;
+    min-height: 300px;
     z-index: 150;
+    .modal-children {
+      padding: 10px;
+    }
     .modal-header {
       height: 50px;
       border-bottom: 1px solid #c0c0c0;

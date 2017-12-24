@@ -19,6 +19,9 @@ interface AuthStoreDefinition extends Reflux.Store {
 export interface CognitoUser {
     username: string;
     signInUserSession: {
+        accessToken: {
+            jwtToken: string;
+        }
         idToken: {
             payload: {
                 'cognito:groups': string[];
@@ -34,6 +37,7 @@ const AuthStore = Reflux.createStore({
     },
 
     load(user: CognitoUser) {
+        console.log(user);
         this.user = user.username;
         this.groups = user.signInUserSession.idToken.payload['cognito:groups'];
         this.authState = 'signedIn';
