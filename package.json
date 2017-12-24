@@ -30,7 +30,8 @@
     "react-fontawesome": "^1.6.1",
     "react-router-dom": "^4.2.2",
     "react-scripts-ts": "2.8.0",
-    "reflux": "^6.4.1"
+    "reflux": "^6.4.1",
+    "universal-cookie": "^2.1.2"
   },
   "scripts": {
     "build-css": "node-sass-chokidar src/ -o src/",

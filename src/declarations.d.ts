@@ -24,3 +24,4 @@ declare module 'aws-appsync' {
 }
 declare module 'lodash.flowright';
 declare module 'aws-appsync-react';
+declare module 'universal-cookie';
